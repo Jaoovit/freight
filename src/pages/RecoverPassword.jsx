@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 const RecoverPassword = () => {
 
     const [email, setEmail] = useState('');
+    const navigate = useNavigate();
     
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        navigate("/login/redefinePassword")
     }
 
     return (
@@ -26,8 +29,8 @@ const RecoverPassword = () => {
                     <div className="mb-4">
                         <label className="block text-gray-700" htmlFor="username">Email</label>
                         <input
-                            type="text"
-                            id="username"
+                            type="email"
+                            id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded"
