@@ -4,7 +4,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 const NavBar = () => {
 
     return (
-        <div className="p-14 font-bold text-blue-950">
+        <div className="p-4 font-bold text-white bg-blue-950 px-12">
             <div className="flex items-center justify-between">
                 {/* Logo */}
                 <Link

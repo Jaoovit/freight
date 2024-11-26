@@ -12,7 +12,7 @@ const Presentation = () => {
                 </div>
             </div>
             {/* Text Section */}
-            <div className="flex flex-col items-center sm:items-start justify-center gap-6 text-center sm:text-left sm:w-1/2">
+            <div className="flex flex-col items-center sm:items-start justify-center gap-6 text-center sm:text-center sm:w-1/2">
                 <p className="text-lg sm:text-2xl text-blue-950">
                     Somos uma transportadora com sede em Santo Tirso, no distrito do Porto, que opera em todo o território de Portugal continental. Com uma equipa dedicada e uma abordagem moderna.
                 </p>
