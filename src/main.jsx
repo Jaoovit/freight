@@ -10,6 +10,7 @@ import './index.css'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
+import RecoverPassword from './pages/RecoverPassword.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route element={<App />}>
         <Route path='/'element={<Home />}></Route>
         <Route path='/login'element={<Login />}></Route>
+        <Route path='/login/recoverPassword'element={<RecoverPassword />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
