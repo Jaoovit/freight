@@ -8,14 +8,19 @@ import './App.css'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 
+{/*Context*/}
+import { AuthProvider } from './context/AuthContext'; 
+
 function App() {
 
   return (
-    <>
-      <NavBar />
-      <Outlet />
-      <Footer />
-    </>
+    <AuthProvider>
+      <>
+        <NavBar />
+        <Outlet />
+        <Footer />
+      </>
+    </AuthProvider>
   )
 }
 

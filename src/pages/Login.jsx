@@ -1,13 +1,40 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
-    const handleSubmit = async (e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        try {
+            const response = await fetch(`${API_URL}/session/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({username, password}),
+            });
+
+            if(response.ok) {
+                const data = await response.json();
+                login(data.token, data.user);
+                navigate('/');
+            } else {
+                const errorData = await response.json();
+                console.error('Login failed:', errorData.message);
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+        }
     }
     return (
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 px-8 sm:px-32 pt-8 sm:pt-24">
