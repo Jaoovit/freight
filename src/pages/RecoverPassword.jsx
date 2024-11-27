@@ -38,7 +38,7 @@ const RecoverPassword = () => {
                         />
                     </div>
                     <button type="submit" className="px-8 py-3 justify-self-center bg-blue-950 text-white rounded-full font-semibold text-lg transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                        Recuperar senha
+                        Recuperar palavra-passe
                     </button>
                 </form>
             </div>
