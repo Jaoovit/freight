@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = createContext();
 
@@ -13,27 +13,29 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        const storedUser = localStorage.getItem('user');
-        setIsLoggedIn(!!token);
-        setUser(storedUser ? parseInt(storedUser, 10) : null);
-    }, []);
+    const token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+    setIsLoggedIn(!!token);
+    setUser(storedUser ? JSON.parse(storedUser) : null);
+}, []);
+
 
     const login = (token, user) => {
         localStorage.setItem('token', token);
-        localStorage.setItem('user', user);
+        localStorage.setItem('user', JSON.stringify(user));
         setIsLoggedIn(true);
         setUser(user);
     };
+    
 
     const logout = async () => {
         try {
-            await fetch(`${apiUrl}/session/logout`, {
+            await fetch(`${API_URL}/session/logout`, {
                 method: 'POST',
                 credentials: 'include',
             });
             localStorage.removeItem('token');
-            localStorage.removeItem('userId');
+            localStorage.removeItem('user');
             setIsLoggedIn(false);
             setUser(null);
         } catch (error) {
