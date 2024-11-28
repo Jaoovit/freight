@@ -13,6 +13,7 @@ import Login from './pages/Login.jsx'
 import RecoverPassword from './pages/RecoverPassword.jsx'
 import RedefinePassword from './pages/RedifinePassword.jsx'
 import Profile from './pages/Profile.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route element={<App />}>
         <Route path='/'element={<Home />}></Route>
-        <Route path='/login'element={<Login />}></Route>
+        <Route path='/login'element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>
         <Route path='/login/recoverPassword'element={<RecoverPassword />}></Route>
         <Route path='/login/redefinePassword' element={<RedefinePassword />}></Route>
         <Route path='/profile'element={<Profile />}></Route>
