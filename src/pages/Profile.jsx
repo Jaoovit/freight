@@ -38,8 +38,6 @@ const Profile = () => {
         return <p>Loading your profile...</p>;
     }
 
-    console.log(user)
-
     return (
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 px-8 sm:px-32 pt-8 sm:pt-24">
             <div className="sm:w-1/2 w-1/2 max-w-lg flex justify-center">

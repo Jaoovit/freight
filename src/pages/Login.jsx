@@ -11,9 +11,11 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isSubmitting) return;
 
         try {
             const response = await fetch(`${API_URL}/session/login`, {
@@ -34,6 +36,8 @@ const Login = () => {
             }
         } catch (error) {
             console.error('Error logging in:', error);
+        } finally {
+            setIsSubmitting(false);
         }
     }
     return (

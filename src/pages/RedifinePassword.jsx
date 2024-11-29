@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const RedefinePassword = () => {
 
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
     const [token, setToken] = useState('');
@@ -24,7 +25,16 @@ const RedefinePassword = () => {
             <form onSubmit={handleSubmit} className="max-w-md bg-white grid justify-items-stretch">
                     <div className="text-s mb-4 text-center text-gray-500">Para redefinir a sua palavra-passe, introduza uma nova palavra-passe, confirme-a e insira o código de verificação que enviámos para o seu e-mail </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700" htmlFor="username">Palavra-passe</label>
+                        <label className="block text-gray-700" htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                            required
+                        />
+                        <label className="block text-gray-700" htmlFor="password">Palavra-passe</label>
                         <input
                             type="password"
                             id="password"
@@ -33,7 +43,7 @@ const RedefinePassword = () => {
                             className="mt-1 block w-full p-2 border border-gray-300 rounded"
                             required
                         />
-                        <label className="block text-gray-700" htmlFor="username">Confirme a palavra-passe</label>
+                        <label className="block text-gray-700" htmlFor="confPassword">Confirme a palavra-passe</label>
                         <input
                             type="password"
                             id="confPassword"
@@ -42,9 +52,9 @@ const RedefinePassword = () => {
                             className="mt-1 block w-full p-2 border border-gray-300 rounded"
                             required
                         />
-                        <label className="block text-gray-700" htmlFor="username">Chave de Verificação</label>
+                        <label className="block text-gray-700" htmlFor="token">Chave de Verificação</label>
                         <input
-                            type="token"
+                            type="password"
                             id="token"
                             value={token}
                             onChange={(e) => setToken(e.target.value)}

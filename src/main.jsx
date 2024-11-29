@@ -14,6 +14,7 @@ import RecoverPassword from './pages/RecoverPassword.jsx'
 import RedefinePassword from './pages/RedifinePassword.jsx'
 import Profile from './pages/Profile.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Delivery from './pages/Delivery.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/login/recoverPassword'element={<RecoverPassword />}></Route>
         <Route path='/login/redefinePassword' element={<RedefinePassword />}></Route>
         <Route path='/profile'element={<Profile />}></Route>
+        <Route path='/deliverys'element={<Delivery />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
