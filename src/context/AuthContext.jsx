@@ -9,8 +9,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
     const token = localStorage.getItem('token');
@@ -30,14 +30,18 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
+            console.log(API_URL)
+            console.log("Starting logout...");
             await fetch(`${API_URL}/session/logout`, {
                 method: 'POST',
                 credentials: 'include',
             });
+            console.log("Logged out from server.");
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             setIsLoggedIn(false);
             setUser(null);
+            console.log("Client-side logout successful.");
         } catch (error) {
             console.error("Logout failed:", error);
         }

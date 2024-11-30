@@ -4,8 +4,8 @@ import { useAuth } from '../context/AuthContext';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Delivery = () => {
-
     const [undeliveredDeliveries, setUndeliveredDeliveries] = useState([]);
+    const [unpaydDeliveries, setUnpaydDeliveries] = useState([]);
     const { user } = useAuth();
 
     useEffect(() => {
@@ -19,15 +19,24 @@ const Delivery = () => {
                     const undelivered = data.cars.flatMap((car) =>
                         car.delivery.filter((delivery) => delivery.deliveryStatus === "undelivered")
                     );
-                    console.log(data.cars);
+
                     setUndeliveredDeliveries(undelivered);
+
+                    const unpaid = data.cars.flatMap((car) => 
+                        car.delivery.filter((delivery) => delivery.paymentStatus === "unpaid" && delivery.deliveryStatus === "delivered")
+                    );
+
+                    setUnpaydDeliveries(unpaid);
+
                 } catch (error) {
                     console.error("Error fetching deliveries:", error);
                 }
             };
             getCars();
+            
         }
-    }, [user]);
+    }, [user?.id]);
+    console.log(undeliveredDeliveries)
 
     const formatScheduledDate = (scheduledAt) => {
         const scheduledDate = new Date(scheduledAt);
@@ -46,9 +55,14 @@ const Delivery = () => {
         return { date, time };
     };
 
+    const totalFee = unpaydDeliveries.reduce((sum, delivery) => sum + delivery.fee, 0);
+
+    if (!user) return null;
+
     return (
         <div className="flex flex-col items-center pt-24">
             <h1 className="text-lg sm:text-2xl text-blue-950 font-bold">Entregas por fazer:</h1>
+            
             <div>
                 {undeliveredDeliveries.length > 0 ? (
                     <div className="flex flex-col sm:flex-row gap-12 items-center py-24">
@@ -69,9 +83,18 @@ const Delivery = () => {
                 ) : (
                     <p>Sem entregas disponíveis.</p>
                 )}
+                {/* Total Fee Section */}
+            {unpaydDeliveries && (
+                <div className="mt-8 flex justify-center items-center gap-9">
+                    <h3 className="text-xl font-semibold text-slate-800">Total a Receber:</h3>
+                    <p className="text-2xl text-blue-950 font-bold">{totalFee.toFixed(2)} €</p>
+                </div>
+            )}
             </div>
+            
         </div>
     );
 }
 
 export default Delivery;
+

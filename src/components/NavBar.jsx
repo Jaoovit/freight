@@ -8,7 +8,9 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
+        console.log("Handle logout triggered.");
         await logout();
+        console.log("Navigating to home page...");
         navigate('/');
     };
 
@@ -40,12 +42,6 @@ const NavBar = () => {
                                         to="/deliverys"
                                     >
                                         Entregas
-                                    </Link>
-                                    <Link
-                                        className="transition hover:text-orange-600 duration-500"
-                                        to="/financialStatement"
-                                    >
-                                        Extrato Financeiro
                                     </Link>
                                 </>
                             )}
