@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -16,7 +16,7 @@ const Transporter = () => {
                 const data = await res.json();
 
                 setTransporter(data.user);
-                setCars(data.user.car); // Assuming 'car' is an array of cars
+                setCars(data.user.car);
             } catch (error) {
                 console.error(`Error fetching transporter ${id}:`, error);
             }

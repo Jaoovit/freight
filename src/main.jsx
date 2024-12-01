@@ -18,6 +18,7 @@ import Payments from './pages/Payments.jsx';
 import DeliveryToConfirm from './pages/DeliveryToConfirm.jsx'
 import Transporters from './pages/Transportes.jsx'
 import Transporter from './pages/Transporter.jsx'
+import Search from './pages/Search.jsx'
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -39,6 +40,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/deliveryToConfirm'element={<ProtectedManagerRoute><DeliveryToConfirm /></ProtectedManagerRoute>}></Route>
         <Route path='/transporters'element={<ProtectedManagerRoute><Transporters /></ProtectedManagerRoute>}></Route>
         <Route path='/transporter/:id'element={<Transporter />}></Route>
+        <Route path='search' element={<Search />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

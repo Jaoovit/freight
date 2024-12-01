@@ -2,10 +2,20 @@ import { Link } from "react-router-dom";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 
 const NavBar = () => {
+    const [search, setSearch] = useState("");
     const { isLoggedIn, user, logout } = useAuth();
     const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(!search) return
+        navigate(`/search?q=${search}`)
+        setSearch("")
+      }
 
     const handleLogout = async () => {
         console.log("Handle logout triggered.");
@@ -26,7 +36,7 @@ const NavBar = () => {
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className="flex gap-9">
+                <div className="flex gap-9 items-center">
                     {isLoggedIn ? (
                         <>
                             <Link 
@@ -46,34 +56,30 @@ const NavBar = () => {
                                 </>
                             )}
                             {user.role === "manager" && (
-                                <>
-                                    <Link
-                                        className="transition hover:text-orange-600 duration-500"
-                                        to="/payments"
-                                    >
-                                        Pagamentos
-                                    </Link>
-                                </>
-                            )}
-                            {user.role === "manager" && (
-                                <>
-                                    <Link
-                                        className="transition hover:text-orange-600 duration-500"
-                                        to="/deliveryToConfirm"
-                                    >
-                                        Entregas
-                                    </Link>
-                                </>
-                            )}
-                            {user.role === "manager" && (
-                                <>
-                                    <Link
-                                        className="transition hover:text-orange-600 duration-500"
-                                        to="/transporters"
-                                    >
-                                        Transportadores
-                                    </Link>
-                                </>
+                                <div className="flex items-center gap-9">
+                                    <form className="flex gap-9" onSubmit={handleSubmit}>
+                                        <input className="text-gray-500 rounded-md p-2 border shadow-sm border-slate-300 focus:outline-none focus:border-blue-950" type="text" placeholder="Procure um transportador" value={search} onChange={(e) => {setSearch(e.target.value)}}/>
+                                        <button className="transition border-2 rounded-md p-2 hover:text-slate-100 hover:border-slate-100 hover:bg-blue-950 duration-200" type="submit"><FaSearch /></button>
+                                    </form>
+                                        <Link
+                                            className="transition hover:text-orange-600 duration-500"
+                                            to="/payments"
+                                        >
+                                            Pagamentos
+                                        </Link>
+                                        <Link
+                                            className="transition hover:text-orange-600 duration-500"
+                                            to="/deliveryToConfirm"
+                                        >
+                                            Entregas
+                                        </Link>
+                                        <Link
+                                            className="transition hover:text-orange-600 duration-500"
+                                            to="/transporters"
+                                        >
+                                            Transportadores
+                                        </Link>
+                                </div>
                             )}
                             <button
                                 onClick={handleLogout}
