@@ -16,6 +16,7 @@ import Profile from './pages/Profile.jsx'
 import Delivery from './pages/Delivery.jsx';
 import Payments from './pages/Payments.jsx';
 import DeliveryToConfirm from './pages/DeliveryToConfirm.jsx'
+import Transporters from './pages/Transportes.jsx'
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/delivery'element={<ProtectedTransporterRoute><Delivery /></ProtectedTransporterRoute>}></Route>
         <Route path='/payments'element={<ProtectedManagerRoute><Payments /></ProtectedManagerRoute>}></Route>
         <Route path='/deliveryToConfirm'element={<ProtectedManagerRoute><DeliveryToConfirm /></ProtectedManagerRoute>}></Route>
+        <Route path='/transporters'element={<ProtectedManagerRoute><Transporters /></ProtectedManagerRoute>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
