@@ -15,6 +15,7 @@ import RedefinePassword from './pages/RedifinePassword.jsx'
 import Profile from './pages/Profile.jsx'
 import Delivery from './pages/Delivery.jsx';
 import Payments from './pages/Payments.jsx';
+import DeliveryToConfirm from './pages/DeliveryToConfirm.jsx'
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/profile'element={<Profile />}></Route>
         <Route path='/delivery'element={<ProtectedTransporterRoute><Delivery /></ProtectedTransporterRoute>}></Route>
         <Route path='/payments'element={<ProtectedManagerRoute><Payments /></ProtectedManagerRoute>}></Route>
+        <Route path='/deliveryToConfirm'element={<ProtectedManagerRoute><DeliveryToConfirm /></ProtectedManagerRoute>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

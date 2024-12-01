@@ -59,6 +59,16 @@ const NavBar = () => {
                                 <>
                                     <Link
                                         className="transition hover:text-orange-600 duration-500"
+                                        to="/deliveryToConfirm"
+                                    >
+                                        Entregas
+                                    </Link>
+                                </>
+                            )}
+                            {user.role === "manager" && (
+                                <>
+                                    <Link
+                                        className="transition hover:text-orange-600 duration-500"
                                         to="/transporters"
                                     >
                                         Transportadores

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const Payments = () => {
-  const [deliveries, setDeliveries] = useState([]);
+const MarkDelivery = () => {
+  const [undeliveredDeliveries, setUndeliveredDeliveries] = useState([]);
   const [transporters, setTransporters] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,17 +18,16 @@ const Payments = () => {
           throw new Error(`HTTP error! Status: ${deliveryRes.status}`);
         }
         const deliveryData = await deliveryRes.json();
-        const unpaidDelivered = deliveryData.deliveries.filter(
-          (delivery) =>
-            delivery.paymentStatus === "unpaid" &&
-            delivery.deliveryStatus === "delivered"
+
+        const undelivered = deliveryData.deliveries.filter(
+          (delivery) => delivery.deliveryStatus === "undelivered"
         );
 
-        setDeliveries(unpaidDelivered);
+        setUndeliveredDeliveries(undelivered);
 
         const transporterData = {};
         await Promise.all(
-          unpaidDelivered.map(async (delivery) => {
+          undelivered.map(async (delivery) => {
             if (!transporterData[delivery.carId]) {
               const transporterRes = await fetch(
                 `${API_URL}/user/transporter/${delivery.carId}`
@@ -53,41 +52,42 @@ const Payments = () => {
     fetchData();
   }, []);
 
-  const handlePayment = async (deliveryId, delivery, transporter) => {
+  const handleMarkAsDelivered = async (deliveryId, delivery) => {
     const confirmation = window.confirm(
-      `Você tem certeza que quer marcar a entrega ${delivery.protocol} como pago?\n\n` +
+      `Você tem certeza que quer marcar a entrega ${delivery.protocol} como entregue?\n\n` +
       `Detalhes da entrega:\n` +
-      `- Protocol: ${delivery.protocol}\n` +
-      `- Amount to Pay: ${delivery.fee.toFixed(2)} €\n\n` +
-      `Detalhes do transportador:\n` +
-      `- Name: ${transporter.firstName} ${transporter.lastName}\n` +
-      `- IBAN: ${transporter.iban}\n`
+      `- Protocólo: ${delivery.protocol}\n` +
+      `- Valor a pagar: ${delivery.fee.toFixed(2)} €`
     );
-  
+
     if (!confirmation) return;
-  
+
     try {
-      const response = await fetch(`${API_URL}/delivery/${deliveryId}/pay`, {
+      const response = await fetch(`${API_URL}/delivery/${deliveryId}/deliver`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        body: JSON.stringify({
+          deliveryStatus: "delivered",
+        }),
       });
-  
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-  
-      setDeliveries((prevDeliveries) =>
+
+      
+      setUndeliveredDeliveries((prevDeliveries) =>
         prevDeliveries.filter((delivery) => delivery.id !== deliveryId)
       );
     } catch (error) {
-      console.error("Payment failed:", error);
-      alert(`Failed to mark delivery ${deliveryId} as paid.`);
+      console.error("Failed to mark delivery as delivered:", error);
+      alert(`Failed to mark delivery ${delivery.protocol} as delivered.`);
     }
   };
-  
+
   if (loading) return <div>Loading deliveries...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -105,18 +105,16 @@ const Payments = () => {
     return { date, time };
   };
 
-  const totalFee = deliveries.reduce((sum, delivery) => sum + delivery.fee, 0);
-
   return (
     <div className="flex flex-col items-center pt-24">
       <h1 className="text-lg sm:text-2xl text-blue-950 font-bold">
-        Entregas por pagar:
+        Entregas não realizadas:
       </h1>
 
       <div>
-        {deliveries.length > 0 ? (
+        {undeliveredDeliveries.length > 0 ? (
           <div className="flex flex-col sm:flex-row gap-12 items-center py-24">
-            {deliveries.map((delivery) => {
+            {undeliveredDeliveries.map((delivery) => {
               const { date, time } = formatScheduledDate(delivery.scheduledAt);
               const transporter = transporters[delivery.carId];
 
@@ -126,33 +124,35 @@ const Payments = () => {
                   key={delivery.id}
                 >
                   {transporter && (
-                      <>
+                    <>
                       <p><strong>Transportador:</strong> {transporter.firstName} {transporter.lastName}</p>
                       <p><strong>IBAN:</strong> {transporter.iban}</p>
                       <p><strong>NIF:</strong> {transporter.taxDocument}</p>
                     </>
                   )}
                   <p><strong>Protocolo:</strong> {delivery.protocol}</p>
-                  <p><strong>Valor a pagar:</strong> {totalFee.toFixed(2)} €</p>
+                  <p><strong>Valor:</strong> {delivery.fee.toFixed(2)} €</p>
                   <p><strong>Data:</strong> {date}</p>
                   <p><strong>Hora:</strong> {time}</p>
                   <button
                     className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                    onClick={() => handlePayment(delivery.id, delivery, transporter)}
-                    >
-                    Pagar
+                    onClick={() => handleMarkAsDelivered(delivery.id, delivery)}
+                  >
+                    Entregue
                   </button>
-
                 </div>
               );
             })}
           </div>
         ) : (
-          <p>Nada consta.</p>
+          <p>Nenhuma entrega pendente.</p>
         )}
       </div>
     </div>
   );
 };
 
-export default Payments;
+export default MarkDelivery;
+
+
+
