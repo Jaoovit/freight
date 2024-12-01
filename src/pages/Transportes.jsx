@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -52,7 +53,7 @@ const Transportes = () => {
                                 </p>
                                 <p><strong>Distrito: </strong>{transporter.state}</p>
                                 <p><strong>Conselho: </strong>{transporter.city}</p>
-                                <button className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Detalhes</button>
+                                <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Detalhes</Link>
                             </div>
                         )
                     })}
