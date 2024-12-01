@@ -39,15 +39,30 @@ const NavBar = () => {
                                 <>
                                     <Link
                                         className="transition hover:text-orange-600 duration-500"
-                                        to="/deliverys"
+                                        to="/delivery"
                                     >
                                         Entregas
                                     </Link>
                                 </>
                             )}
-                            {user.role === "operator" && (
+                            {user.role === "manager" && (
                                 <>
-                                    
+                                    <Link
+                                        className="transition hover:text-orange-600 duration-500"
+                                        to="/payments"
+                                    >
+                                        Pagamentos
+                                    </Link>
+                                </>
+                            )}
+                            {user.role === "manager" && (
+                                <>
+                                    <Link
+                                        className="transition hover:text-orange-600 duration-500"
+                                        to="/transporters"
+                                    >
+                                        Transportadores
+                                    </Link>
                                 </>
                             )}
                             <button

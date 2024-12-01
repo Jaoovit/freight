@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'; // Use Navigate from react-router-dom v6
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {

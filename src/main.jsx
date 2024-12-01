@@ -6,15 +6,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 {/*Css*/}
 import './index.css'
 
-{/*JSX files*/}
+{/*Pages*/}
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import RecoverPassword from './pages/RecoverPassword.jsx'
 import RedefinePassword from './pages/RedifinePassword.jsx'
 import Profile from './pages/Profile.jsx'
-import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Delivery from './pages/Delivery.jsx';
+
+{/*Components*/}
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import ProtectedTransporterRoute from './components/ProtectedTransporterRoute.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,7 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/login/recoverPassword'element={<RecoverPassword />}></Route>
         <Route path='/login/redefinePassword' element={<RedefinePassword />}></Route>
         <Route path='/profile'element={<Profile />}></Route>
-        <Route path='/deliverys'element={<Delivery />}></Route>
+        <Route path='/delivery'element={<ProtectedTransporterRoute><Delivery /></ProtectedTransporterRoute>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
