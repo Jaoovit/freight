@@ -7,18 +7,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 
 {/*Pages*/}
-import App from './App.jsx'
-import Home from './pages/Home.jsx'
-import Login from './pages/Login.jsx'
-import RecoverPassword from './pages/RecoverPassword.jsx'
-import RedefinePassword from './pages/RedifinePassword.jsx'
-import Profile from './pages/Profile.jsx'
+import App from './App.jsx';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import RecoverPassword from './pages/RecoverPassword.jsx';
+import RedefinePassword from './pages/RedifinePassword.jsx';
+import Profile from './pages/Profile.jsx';
 import Delivery from './pages/Delivery.jsx';
 import Payments from './pages/Payments.jsx';
-import DeliveryToConfirm from './pages/DeliveryToConfirm.jsx'
-import Transporters from './pages/Transportes.jsx'
-import Transporter from './pages/Transporter.jsx'
-import Search from './pages/Search.jsx'
+import DeliveryToConfirm from './pages/DeliveryToConfirm.jsx';
+import Transporters from './pages/Transportes.jsx';
+import Transporter from './pages/Transporter.jsx';
+import Search from './pages/Search.jsx';
+import AddTransporter from './pages/AddTransporter.jsx';
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -41,6 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/transporters'element={<ProtectedManagerRoute><Transporters /></ProtectedManagerRoute>}></Route>
         <Route path='/transporter/:id'element={<Transporter />}></Route>
         <Route path='search' element={<Search />}></Route>
+        <Route path='add-transporter' element={<AddTransporter />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -34,8 +34,16 @@ const Transportes = () => {
 
     return (
         <div className="flex flex-col items-center pt-24">
+            <div className="w-full flex justify-start px-24 pb-6 mb-4">
+                <Link 
+                    to="/add-transporter"
+                    className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2"
+                >
+                    Adicionar transportador
+                </Link>
+            </div>
             {transportes.length > 0 ? (
-                <div>
+                <div className="flex flex-wrap justify-center items-center gap-12">
                     {transportes.map((transporter) => {
                         return (
                             <div className="grid justify-items-stretch flex flex-col max-w-96 rounded-md p-8 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-3 shadow-md" key={transporter.id}>
@@ -53,7 +61,7 @@ const Transportes = () => {
                                 </p>
                                 <p><strong>Distrito: </strong>{transporter.state}</p>
                                 <p><strong>Conselho: </strong>{transporter.city}</p>
-                                <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Detalhes</Link>
+                                <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2 justify-self-center">Detalhes</Link>
                             </div>
                         )
                     })}
@@ -62,7 +70,8 @@ const Transportes = () => {
                 <div>Não há transportadores disponíveis</div>
             )}
         </div>
-    )
+    );
+    
 }
 
 export default Transportes;
