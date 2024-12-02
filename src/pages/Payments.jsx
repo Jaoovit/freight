@@ -63,22 +63,22 @@ const Payments = () => {
       `- Name: ${transporter.firstName} ${transporter.lastName}\n` +
       `- IBAN: ${transporter.iban}\n`
     );
-  
+
     if (!confirmation) return;
-  
+
     try {
       const response = await fetch(`${API_URL}/delivery/${deliveryId}/pay`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-  
+
       setDeliveries((prevDeliveries) =>
         prevDeliveries.filter((delivery) => delivery.id !== deliveryId)
       );
@@ -87,7 +87,7 @@ const Payments = () => {
       alert(`Failed to mark delivery ${deliveryId} as paid.`);
     }
   };
-  
+
   if (loading) return <div>Loading deliveries...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -115,18 +115,18 @@ const Payments = () => {
 
       <div>
         {deliveries.length > 0 ? (
-          <div className="flex flex-col sm:flex-row gap-12 items-center py-24">
+          <div className="flex flex-wrap gap-12 items-center py-24 justify-center">
             {deliveries.map((delivery) => {
               const { date, time } = formatScheduledDate(delivery.scheduledAt);
               const transporter = transporters[delivery.carId];
 
               return (
                 <div
-                  className="grid justify-items-stretch flex flex-col max-w-96 rounded-md p-8 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-3 shadow-md"
+                  className="flex flex-col w-80 h-[400px] max-w-xs p-6 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md"
                   key={delivery.id}
                 >
                   {transporter && (
-                      <>
+                    <>
                       <p><strong>Transportador:</strong> {transporter.firstName} {transporter.lastName}</p>
                       <p><strong>IBAN:</strong> {transporter.iban}</p>
                       <p><strong>NIF:</strong> {transporter.taxDocument}</p>
@@ -136,13 +136,16 @@ const Payments = () => {
                   <p><strong>Valor a pagar:</strong> {totalFee.toFixed(2)} €</p>
                   <p><strong>Data:</strong> {date}</p>
                   <p><strong>Hora:</strong> {time}</p>
-                  <button
-                    className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2 justify-self-center"
-                    onClick={() => handlePayment(delivery.id, delivery, transporter)}
-                    >
-                    Pagar
-                  </button>
 
+                  {/* Button container ensuring the button is at the bottom */}
+                  <div className="flex justify-center mt-auto">
+                    <button
+                      className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2"
+                      onClick={() => handlePayment(delivery.id, delivery, transporter)}
+                    >
+                      Pagar
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -156,3 +159,4 @@ const Payments = () => {
 };
 
 export default Payments;
+

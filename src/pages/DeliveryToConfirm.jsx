@@ -78,7 +78,6 @@ const MarkDelivery = () => {
         throw new Error(`Error: ${response.status}`);
       }
 
-      
       setUndeliveredDeliveries((prevDeliveries) =>
         prevDeliveries.filter((delivery) => delivery.id !== deliveryId)
       );
@@ -113,14 +112,14 @@ const MarkDelivery = () => {
 
       <div>
         {undeliveredDeliveries.length > 0 ? (
-          <div className="flex flex-col sm:flex-row gap-12 items-center py-24">
+          <div className="flex flex-wrap gap-12 items-center py-24 justify-center">
             {undeliveredDeliveries.map((delivery) => {
               const { date, time } = formatScheduledDate(delivery.scheduledAt);
               const transporter = transporters[delivery.carId];
 
               return (
                 <div
-                  className="grid justify-items-stretch flex flex-col max-w-96 rounded-md p-8 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-3 shadow-md"
+                  className="flex flex-col w-80 h-[400px] max-w-xs p-6 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md"
                   key={delivery.id}
                 >
                   {transporter && (
@@ -134,12 +133,15 @@ const MarkDelivery = () => {
                   <p><strong>Valor:</strong> {delivery.fee.toFixed(2)} €</p>
                   <p><strong>Data:</strong> {date}</p>
                   <p><strong>Hora:</strong> {time}</p>
-                  <button
-                    className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2 justify-self-center"
-                    onClick={() => handleMarkAsDelivered(delivery.id, delivery)}
-                  >
-                    Entregue
-                  </button>
+                  
+                  <div className="flex justify-center mt-auto">
+                    <button
+                      className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2"
+                      onClick={() => handleMarkAsDelivered(delivery.id, delivery)}
+                    >
+                      Entregue
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -153,6 +155,11 @@ const MarkDelivery = () => {
 };
 
 export default MarkDelivery;
+
+
+
+
+
 
 
 

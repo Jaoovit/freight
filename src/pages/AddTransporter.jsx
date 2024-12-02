@@ -37,7 +37,7 @@ const AddTransporter = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setProfileImage(file); // Set the selected file in state
+    setProfileImage(file);
   };
 
   const handleSubmit = async (e) => {
@@ -48,7 +48,6 @@ const AddTransporter = () => {
       return;
     }
 
-    // Create FormData object to send the data as multipart/form-data
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
@@ -66,13 +65,13 @@ const AddTransporter = () => {
     formData.append("workdays", JSON.stringify(workDays.map((dia) => diasMap[dia])));
 
     if (profileImage) {
-      formData.append("profileImage", profileImage); // Add the profile image to the form data
+      formData.append("profileImage", profileImage);
     }
 
     try {
       const response = await fetch(`${API_URL}/user/transporter/register`, {
         method: "POST",
-        body: formData, // Send the form data with the image
+        body: formData,
       });
 
       if (!response.ok) {
