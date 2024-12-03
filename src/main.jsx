@@ -20,6 +20,8 @@ import Transporters from './pages/Transportes.jsx';
 import Transporter from './pages/Transporter.jsx';
 import Search from './pages/Search.jsx';
 import AddTransporter from './pages/AddTransporter.jsx';
+import Car from './pages/Car.jsx';
+import AddDelivery from './pages/AddDelivery.jsx';
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -43,6 +45,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/transporter/:id'element={<Transporter />}></Route>
         <Route path='search' element={<Search />}></Route>
         <Route path='add-transporter' element={<AddTransporter />}></Route>
+        <Route path='/car/:id'element={<Car />}></Route>
+        <Route path="/car/:id/add-delivery" element={<AddDelivery />} />
         </Route>
       </Routes>
     </BrowserRouter>

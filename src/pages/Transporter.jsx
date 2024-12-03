@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -70,6 +70,12 @@ const Transporter = () => {
                                     <li><strong>Profundidade: </strong>{car.depth}m</li>
                                     <li><strong>Capacidade: </strong>{car.capacity} L</li>
                                 </ul>
+                                <Link 
+                                    to={`/car/${car.id}`} 
+                                    className="bg-blue-950 text-white font-medium text-lg rounded-full transition duration-300 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-6 py-2 self-start mt-4"
+                                >
+                                    Detalhes
+                                </Link>
                             </div>
                         </div>
                     ))}
