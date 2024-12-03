@@ -22,6 +22,7 @@ import Search from './pages/Search.jsx';
 import AddTransporter from './pages/AddTransporter.jsx';
 import Car from './pages/Car.jsx';
 import AddDelivery from './pages/AddDelivery.jsx';
+import AddCar from './pages/AddCar.jsx';
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -46,7 +47,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='search' element={<Search />}></Route>
         <Route path='add-transporter' element={<AddTransporter />}></Route>
         <Route path='/car/:id'element={<Car />}></Route>
-        <Route path="/car/:id/add-delivery" element={<AddDelivery />} />
+        <Route path='/car/:id/add-delivery' element={<AddDelivery />} />
+        <Route path='/transporter/:id/add-car' element={<AddCar />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -29,35 +29,46 @@ const Transporter = () => {
     }
 
     return (
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 px-8 sm:px-32 pt-8 sm:pt-24">
+        <div className="flex flex-col gap-8 sm:gap-16 px-8 sm:px-32 pt-8 sm:pt-24">
+            <div className="mt-8">
+                <Link
+                to={`/transporter/${id}/add-car`}
+                className="bg-blue-950 text-white font-medium text-lg rounded-full transition duration-300 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-6 py-2 self-start mt-4"
+                >
+                Adicionar Carro
+                </Link>
+            </div>
             {/* Transporter Information */}
-            <div className="sm:w-1/2 w-1/2 max-w-lg flex justify-center">
-                <div className="w-32 h-32 sm:w-48 sm:h-48 lg:w-[30rem] lg:h-[30rem] rounded-full overflow-hidden shadow-lg">
-                    <img 
-                        src={transporter.profileImage} 
-                        alt={transporter.username} 
-                        className="w-full h-full object-cover"
-                    />
+            <div className="flex">
+                <div className="sm:w-1/2 w-1/2 max-w-lg flex justify-center">
+                    <div className="w-32 h-32 sm:w-48 sm:h-48 lg:w-[30rem] lg:h-[30rem] rounded-full overflow-hidden shadow-lg">
+                        <img 
+                            src={transporter.profileImage} 
+                            alt={transporter.username} 
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-col items-left text-xl gap-8 px-8 sm:px-32 pt-8 sm:pt-24" key={transporter.id}>
+                    <p><strong>Name: </strong>{transporter.firstName} {transporter.lastName}</p>
+                    <p><strong>Email: </strong>{transporter.email}</p>
+                    <p><strong>Telefone: </strong>{transporter.phone}</p>
+                    <p><strong>Distrito: </strong>{transporter.state}</p>
+                    <p><strong>Conselho: </strong>{transporter.city}</p>
+                    <p><strong>Freguesia: </strong>{transporter.neighborhood}</p>
+                    <p><strong>Código postal: </strong>{transporter.postalCode}</p>
+                    <p><strong>NIF: </strong>{transporter.taxDocument}</p>
+                    <p><strong>IBAN: </strong>{transporter.iban}</p>
                 </div>
             </div>
-            <div className="flex flex-col items-left text-xl gap-8 px-8 sm:px-32 pt-8 sm:pt-24" key={transporter.id}>
-                <p><strong>Name: </strong>{transporter.firstName} {transporter.lastName}</p>
-                <p><strong>Email: </strong>{transporter.email}</p>
-                <p><strong>Telefone: </strong>{transporter.phone}</p>
-                <p><strong>Distrito: </strong>{transporter.state}</p>
-                <p><strong>Conselho: </strong>{transporter.city}</p>
-                <p><strong>Freguesia: </strong>{transporter.neighborhood}</p>
-                <p><strong>Código postal: </strong>{transporter.postalCode}</p>
-                <p><strong>NIF: </strong>{transporter.taxDocument}</p>
-                <p><strong>IBAN: </strong>{transporter.iban}</p>
-            </div>
+
 
             {/* Cars Information */}
+            <h2 className="text-2xl font-bold mb-4">Carros</h2>
             {cars.length > 0 ? (
-                <div className="w-full mt-8">
-                    <h2 className="text-2xl font-bold mb-4">Carros</h2>
+                <div className="flex flex-wrap justify-center items-center gap-6">
                     {cars.map((car) => (
-                        <div className="flex flex-col sm:flex-row gap-4 mb-6 border-b pb-4" key={car.id}>
+                        <div className="flex flex-col items-center max-w-xs w-80 h-[400px] p-4 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md" key={car.id}>
                             <div className="flex flex-col sm:w-2/3 w-full text-lg">
                                 <p><strong>Modelo: </strong>{car.model}</p>
                                 <p><strong>Ano: </strong>{car.year}</p>
