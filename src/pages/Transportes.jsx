@@ -20,7 +20,10 @@ const Transportes = () => {
         const transportesUrl = `${API_URL}/user/transporter`;
         const getTransporters = async () => {
             try {
-                const res = await fetch(transportesUrl);
+                const res = await fetch(transportesUrl, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
                 const data = await res.json();
                 setTransportes(data.transporters);
             } catch (error) {

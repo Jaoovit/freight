@@ -13,7 +13,10 @@ const Payments = () => {
       try {
         setLoading(true);
 
-        const deliveryRes = await fetch(`${API_URL}/delivery`);
+        const deliveryRes = await fetch(`${API_URL}/delivery`, {
+            method: 'GET',
+            credentials: 'include',
+        });
         if (!deliveryRes.ok) {
           throw new Error(`HTTP error! Status: ${deliveryRes.status}`);
         }
@@ -31,7 +34,10 @@ const Payments = () => {
           unpaidDelivered.map(async (delivery) => {
             if (!transporterData[delivery.carId]) {
               const transporterRes = await fetch(
-                `${API_URL}/user/transporter/${delivery.carId}`
+                `${API_URL}/user/transporter/${delivery.carId}`, {
+                  method: 'GET',
+                  credentials: 'include',
+              }
               );
               if (!transporterRes.ok) {
                 throw new Error(`HTTP error! Status: ${transporterRes.status}`);

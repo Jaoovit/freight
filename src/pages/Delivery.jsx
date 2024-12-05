@@ -14,7 +14,10 @@ const Delivery = () => {
             const carsUrl = `${API_URL}/car/user/${user.id}`;
             const getCars = async () => {
                 try {
-                    const res = await fetch(carsUrl);
+                    const res = await fetch(carsUrl, {
+                        method: 'GET',
+                        credentials: 'include',
+                    });
                     const data = await res.json();
                     
                     const undelivered = data.cars.flatMap((car) =>

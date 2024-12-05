@@ -13,10 +13,13 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-    const token = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
-    setIsLoggedIn(!!token);
-    setUser(storedUser ? JSON.parse(storedUser) : null);
+        const storedToken = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        
+        if (storedToken && storedUser) {
+            setIsLoggedIn(true);
+            setUser(JSON.parse(storedUser));
+        }
 }, []);
 
 

@@ -10,9 +10,12 @@ const Car = () => {
 
     useEffect(() => {
         const getCar = async () => {
-            const carUrl = `${API_URL}/car/${id}`;
+            const carUrl = `${API_URL}/car/${id}, `;
             try {
-                const res = await fetch(carUrl);
+                const res = await fetch(carUrl, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
                 const data = await res.json();
                 setCar(data.car);
             } catch (error) {

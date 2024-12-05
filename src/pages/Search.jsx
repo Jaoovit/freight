@@ -26,7 +26,10 @@ const Search = () => {
             try {
                 const searchTransporterUrl = `${API_URL}/user/transporter/search?query=${query}`;
 
-                const res = await fetch(searchTransporterUrl);
+                const res = await fetch(searchTransporterUrl, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
                 const data = await res.json();
 
                 setSearchTransporter(data.transporters)

@@ -12,7 +12,10 @@ const Transporter = () => {
         const getTransporter = async () => {
             const transporterUrl = `${API_URL}/user/${id}`;
             try {
-                const res = await fetch(transporterUrl);
+                const res = await fetch(transporterUrl, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
                 const data = await res.json();
 
                 setTransporter(data.user);

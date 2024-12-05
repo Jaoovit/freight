@@ -32,7 +32,7 @@ const AddCar = () => {
     e.preventDefault();
 
     if (!userId) {
-      setMessage("Invalid user ID.");
+      setMessage("ID de usuário inválido.");
       return;
     }
 
@@ -57,7 +57,7 @@ const AddCar = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Car registered successfully!");
+        setMessage("Carro registrado com sucesso!");
         setFormData({
           registration: "",
           model: "",
@@ -71,18 +71,18 @@ const AddCar = () => {
         });
         setImages([]);
       } else {
-        setMessage(data.message || "Failed to register car.");
+        setMessage(data.message || "Falha ao registrar o carro.");
       }
     } catch (error) {
-      console.error("Error registering car:", error);
-      setMessage("Error registering car.");
+      console.error("Erro ao registrar o carro:", error);
+      setMessage("Erro ao registrar o carro.");
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
       <h2 className="text-2xl font-bold mb-6">Adicionar Carro</h2>
-      {message && <p className="mb-4 text-red-500">{message}</p>}
+      {message && <p className="mb-4 text-green-500">{message}</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex flex-col">
           <label htmlFor="registration" className="font-medium mb-1">
@@ -130,18 +130,18 @@ const AddCar = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="model" className="font-medium mb-1">
-            Modelo
+          <label htmlFor="category" className="font-medium mb-1">
+            Categoria
           </label>
           <select
-            id="model"
-            name="model"
-            value={formData.model}
+            id="category"
+            name="category"
+            value={formData.category}
             onChange={handleInputChange}
             required
             className="border px-4 py-2 rounded-md"
           >
-            <option value="" disabled>Selecione um modelo</option>
+            <option value="" disabled>Selecione uma categoria</option>
             <option value="moto">Moto</option>
             <option value="carro">Carro</option>
             <option value="carrinha">Carrinha</option>
@@ -150,7 +150,6 @@ const AddCar = () => {
             <option value="trator">Trator</option>
           </select>
         </div>
-
 
         <div className="flex flex-col">
           <label htmlFor="year" className="font-medium mb-1">
@@ -245,13 +244,14 @@ const AddCar = () => {
             className="border px-4 py-2 rounded-md"
           />
         </div>
+
         <div className="text-center">
-            <button
+          <button
             type="submit"
             className="bg-blue-950 text-white font-medium text-lg rounded-full transition duration-300 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-6 py-2 self-start mt-4"
-            >
+          >
             Adicionar Carro
-            </button>
+          </button>
         </div>
       </form>
     </div>
@@ -259,3 +259,4 @@ const AddCar = () => {
 };
 
 export default AddCar;
+
