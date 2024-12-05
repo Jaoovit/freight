@@ -23,6 +23,7 @@ import AddTransporter from './pages/AddTransporter.jsx';
 import Car from './pages/Car.jsx';
 import AddDelivery from './pages/AddDelivery.jsx';
 import AddCar from './pages/AddCar.jsx';
+import AddManager from './pages/AddManager.jsx';
 
 {/*Components*/}
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -49,6 +50,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/car/:id'element={<Car />}></Route>
         <Route path='/car/:id/add-delivery' element={<AddDelivery />} />
         <Route path='/transporter/:id/add-car' element={<AddCar />}></Route>
+        <Route path='/add-manager' element={<AddManager />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
