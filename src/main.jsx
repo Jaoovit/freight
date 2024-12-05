@@ -35,22 +35,25 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route element={<App />}>
+        {/*Commun routes*/}
         <Route path='/'element={<Home />}></Route>
         <Route path='/login'element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>
         <Route path='/login/recoverPassword'element={<RecoverPassword />}></Route>
         <Route path='/login/redefinePassword' element={<RedefinePassword />}></Route>
         <Route path='/profile'element={<Profile />}></Route>
+        {/*Transporter route*/}
         <Route path='/delivery'element={<ProtectedTransporterRoute><Delivery /></ProtectedTransporterRoute>}></Route>
+        {/*Manager routes*/}
         <Route path='/payments'element={<ProtectedManagerRoute><Payments /></ProtectedManagerRoute>}></Route>
         <Route path='/deliveryToConfirm'element={<ProtectedManagerRoute><DeliveryToConfirm /></ProtectedManagerRoute>}></Route>
         <Route path='/transporters'element={<ProtectedManagerRoute><Transporters /></ProtectedManagerRoute>}></Route>
-        <Route path='/transporter/:id'element={<Transporter />}></Route>
-        <Route path='search' element={<Search />}></Route>
-        <Route path='add-transporter' element={<AddTransporter />}></Route>
-        <Route path='/car/:id'element={<Car />}></Route>
-        <Route path='/car/:id/add-delivery' element={<AddDelivery />} />
-        <Route path='/transporter/:id/add-car' element={<AddCar />}></Route>
-        <Route path='/add-manager' element={<AddManager />}></Route>
+        <Route path='/transporter/:id'element={<ProtectedManagerRoute><Transporter /></ProtectedManagerRoute>}></Route>
+        <Route path='search' element={<ProtectedManagerRoute><Search /></ProtectedManagerRoute>}></Route>
+        <Route path='add-transporter' element={<ProtectedManagerRoute><AddTransporter /></ProtectedManagerRoute>}></Route>
+        <Route path='/car/:id'element={<ProtectedManagerRoute><Car /></ProtectedManagerRoute>}></Route>
+        <Route path='/car/:id/add-delivery' element={<ProtectedManagerRoute><AddDelivery /></ProtectedManagerRoute>} />
+        <Route path='/transporter/:id/add-car' element={<ProtectedManagerRoute><AddCar /></ProtectedManagerRoute>}></Route>
+        <Route path='/add-manager' element={<ProtectedManagerRoute><AddManager /></ProtectedManagerRoute>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
