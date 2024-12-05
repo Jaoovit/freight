@@ -136,8 +136,6 @@ const Payments = () => {
                   <p><strong>Valor a pagar:</strong> {totalFee.toFixed(2)} €</p>
                   <p><strong>Data:</strong> {date}</p>
                   <p><strong>Hora:</strong> {time}</p>
-
-                  {/* Button container ensuring the button is at the bottom */}
                   <div className="flex justify-center mt-auto">
                     <button
                       className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2"

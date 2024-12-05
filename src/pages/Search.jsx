@@ -41,7 +41,7 @@ const Search = () => {
         <div className="flex flex-col items-center pt-24">
             <h2 className="text-4xl pb-12">Resultados para: <span className="text-orange-600">{query}</span></h2>
             {searchTransporter.length > 0 ? (
-                <div>
+                <div className="flex flex-wrap gap-12 items-center py-24 justify-center">
                     {searchTransporter.map((transporter) => {
                         return (
                             <div className="grid justify-items-stretch flex flex-col max-w-96 rounded-md p-8 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-3 shadow-md" key={transporter.id}>
@@ -60,7 +60,9 @@ const Search = () => {
                                 <p><strong>Distrito: </strong>{transporter.state}</p>
                                 <p><strong>Conselho: </strong>{transporter.city}</p>
                                 <p><strong>Freguesia: </strong>{transporter.neighborhood}</p>
-                                <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Detalhes</Link>
+                                <div className="flex justify-center mt-auto">
+                                    <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-center text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2">Detalhes</Link>
+                                </div>
                             </div>
                         )
                     })}

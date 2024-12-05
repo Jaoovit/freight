@@ -80,7 +80,7 @@ const AddCar = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-4xl mx-auto p-6 bg-white">
       <h2 className="text-2xl font-bold mb-6">Adicionar Carro</h2>
       {message && <p className="mb-4 text-red-500">{message}</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -130,19 +130,27 @@ const AddCar = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="category" className="font-medium mb-1">
-            Categoria
+          <label htmlFor="model" className="font-medium mb-1">
+            Modelo
           </label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={formData.category}
+          <select
+            id="model"
+            name="model"
+            value={formData.model}
             onChange={handleInputChange}
             required
             className="border px-4 py-2 rounded-md"
-          />
+          >
+            <option value="" disabled>Selecione um modelo</option>
+            <option value="moto">Moto</option>
+            <option value="carro">Carro</option>
+            <option value="carrinha">Carrinha</option>
+            <option value="mini caminhão">Mini Caminhão</option>
+            <option value="caminhão">Caminhão</option>
+            <option value="trator">Trator</option>
+          </select>
         </div>
+
 
         <div className="flex flex-col">
           <label htmlFor="year" className="font-medium mb-1">

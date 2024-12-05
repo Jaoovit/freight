@@ -44,7 +44,7 @@ const Transportes = () => {
                 <div className="flex flex-wrap justify-center items-center gap-6">
                     {transportes.map((transporter) => {
                         return (
-                            <div className="flex flex-col items-center max-w-xs w-80 h-[400px] p-4 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md" key={transporter.id}>
+                            <div className="flex flex-col max-w-xs w-80 h-[400px] p-4 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md" key={transporter.id}>
                                 <img 
                                     className="w-32 h-32 rounded-full object-cover shadow-lg mx-auto" 
                                     src={transporter.profileImage} 
@@ -62,9 +62,11 @@ const Transportes = () => {
                                 </p>
                                 <p><strong>Distrito: </strong>{transporter.state}</p>
                                 <p><strong>Conselho: </strong>{transporter.city}</p>
-                                <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2">
-                                    Detalhes
-                                </Link>
+                                <div className="flex justify-center mt-auto">
+                                    <Link to={`/transporter/${transporter.id}`} className="bg-blue-950 text-center text-white rounded-full transition duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2">
+                                        Detalhes
+                                    </Link>
+                                </div>
                             </div>
                         )
                     })}

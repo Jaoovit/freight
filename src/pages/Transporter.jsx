@@ -39,7 +39,7 @@ const Transporter = () => {
                 </Link>
             </div>
             {/* Transporter Information */}
-            <div className="flex">
+            <div className="flex flex-col items-center">
                 <div className="sm:w-1/2 w-1/2 max-w-lg flex justify-center">
                     <div className="w-32 h-32 sm:w-48 sm:h-48 lg:w-[30rem] lg:h-[30rem] rounded-full overflow-hidden shadow-lg">
                         <img 
@@ -66,31 +66,40 @@ const Transporter = () => {
             {/* Cars Information */}
             <h2 className="text-2xl font-bold mb-4">Carros</h2>
             {cars.length > 0 ? (
-                <div className="flex flex-wrap justify-center items-center gap-6">
-                    {cars.map((car) => (
-                        <div className="flex flex-col items-center max-w-xs w-80 h-[400px] p-4 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md" key={car.id}>
-                            <div className="flex flex-col sm:w-2/3 w-full text-lg">
-                                <p><strong>Modelo: </strong>{car.model}</p>
-                                <p><strong>Ano: </strong>{car.year}</p>
-                                <p><strong>Matrícula: </strong>{car.registration}</p>
-                                <p><strong>Categoria: </strong>{car.category}</p>
-                                <p><strong>Cor: </strong>{car.color}</p><br />
-                                <ul><strong>Dimenção da mala: </strong>
-                                    <li><strong>Altura: </strong>{car.height}m </li>
-                                    <li><strong>Largura: </strong>{car.width}m</li>
-                                    <li><strong>Profundidade: </strong>{car.depth}m</li>
-                                    <li><strong>Capacidade: </strong>{car.capacity} L</li>
-                                </ul>
-                                <Link 
-                                    to={`/car/${car.id}`} 
-                                    className="bg-blue-950 text-white font-medium text-lg rounded-full transition duration-300 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 px-6 py-2 self-start mt-4"
-                                >
-                                    Detalhes
-                                </Link>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+               <div className="flex flex-wrap justify-center items-center gap-6">
+               {cars.map((car) => (
+                   <div 
+                       className="flex flex-col justify-between max-w-xs w-80 h-[400px] p-4 bg-slate-100 text-slate-800 border-2 border-slate-200 gap-4 rounded-md shadow-md"
+                       key={car.id}
+                   >
+                       <div className="flex-grow flex flex-col gap-2 text-lg overflow-hidden">
+                           <p className="truncate"><strong>Modelo: </strong>{car.model}</p>
+                           <p className="truncate"><strong>Ano: </strong>{car.year}</p>
+                           <p className="truncate"><strong>Matrícula: </strong>{car.registration}</p>
+                           <p className="truncate"><strong>Categoria: </strong>{car.category}</p>
+                           <p className="truncate"><strong>Cor: </strong>{car.color}</p>
+                           <br />
+                           <ul className="text-sm">
+                               <strong>Dimensão da mala:</strong>
+                               <li className="truncate"><strong>Altura: </strong>{car.height}m</li>
+                               <li className="truncate"><strong>Largura: </strong>{car.width}m</li>
+                               <li className="truncate"><strong>Profundidade: </strong>{car.depth}m</li>
+                               <li className="truncate"><strong>Capacidade: </strong>{car.capacity} L</li>
+                           </ul>
+                       </div>
+                       <div className="flex justify-center mt-auto">
+                        <Link 
+                            to={`/car/${car.id}`} 
+                            className="bg-blue-950 text-white rounded-full transition text-center duration-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 py-2 px-4"
+                            aria-label={`Ver detalhes do carro ${car.model}`}
+                        >
+                            Detalhes
+                        </Link>
+                       </div>
+                   </div>
+               ))}
+           </div>
+           
             ) : (
                 <div className="mt-8">Esse transportador não tem nenhum carro disponível.</div>
             )}
