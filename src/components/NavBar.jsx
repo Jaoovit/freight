@@ -104,6 +104,12 @@ const NavBar = () => {
                                     >
                                         Transportadores
                                     </Link>
+                                    <Link
+                                        className="transition hover:text-orange-600 duration-500"
+                                        to="/add-manager"
+                                    >
+                                        Gestor
+                                    </Link>
                                 </div>
                             )}
                             <button
@@ -188,6 +194,13 @@ const NavBar = () => {
                                         onClick={toggleMenu}
                                     >
                                         Transportadores
+                                    </Link>
+                                    <Link
+                                        className="transition hover:text-orange-600 duration-500"
+                                        to="/add-manager"
+                                        onClick={toggleMenu}
+                                    >
+                                        Gestor
                                     </Link>
                                 </>
                             )}
